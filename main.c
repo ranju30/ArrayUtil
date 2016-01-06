@@ -14,16 +14,40 @@ void return_0_if_two_array_are_not_equal(){
   assert(areEqual(a,b) == 0);
 };
 
-void return_1_if_two_array_are_equal(){
+void return_0_if_two_array_size_are_equal_but_value_diff(){
+  ArrayUtil a = create(4,6);
+  ArrayUtil b = create(4,6);
+  int *a1 = a.base;
+  int *a2 = b.base;
+  a1[0]= 3;
+  a1[1]= 13;
+  a2[0]= 17;
+  a2[1]= 7;
+  assert(areEqual(a,b) == 0);
+};
+
+void return_0_if_two_array_are_equal_for_diff_typrSize_but_value_same(){
+  ArrayUtil a = create(17,6);
+  ArrayUtil b = create(19,6);
+  assert(areEqual(a,b) == 0);
+};
+
+void return_1_if_two_array_are_equal_and_value_same(){
   ArrayUtil a = create(4,6);
   ArrayUtil b = create(4,6);
   assert(areEqual(a,b) == 1);
 };
 
-void return_0_if_two_array_are_equal_for_diff_typrSize(){
-  ArrayUtil a = create(17,6);
-  ArrayUtil b = create(19,6);
-  assert(areEqual(a,b) == 0);
+void return_1_if_two_array_are_equal_and_value_same_and_element_also(){
+  ArrayUtil a = create(4,6);
+  ArrayUtil b = create(4,6);
+  int *a1 = a.base;
+  int *a2 = b.base;
+  a1[0]= 3;
+  a1[1]= 13;
+  a2[0]= 3;
+  a2[1]= 13;
+  assert(areEqual(a,b) == 1);
 };
 
 void check_wheather_an_array_is_being_resized(){
@@ -60,8 +84,10 @@ void return_index_if_the_element_is_present(){
 int main(int argc, char const *argv[]) {
   check_array_is_creating_with_length_5_and_typesize_4();
   return_0_if_two_array_are_not_equal();
-  return_1_if_two_array_are_equal();
-  return_0_if_two_array_are_equal_for_diff_typrSize();
+  return_0_if_two_array_size_are_equal_but_value_diff();
+  return_0_if_two_array_are_equal_for_diff_typrSize_but_value_same();
+  return_1_if_two_array_are_equal_and_value_same();
+  return_1_if_two_array_are_equal_and_value_same_and_element_also();
   check_wheather_an_array_is_being_resized();
   return_negative_1_if_the_element_is_not_present();
   return_index_if_the_element_is_present();

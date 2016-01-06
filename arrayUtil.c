@@ -12,9 +12,15 @@ ArrayUtil create(int typeSize,int length){
 };
 
 int areEqual(ArrayUtil a, ArrayUtil b){
-  if(a.length == b.length && a.typeSize == b.typeSize)
-    return 1;
-  return 0;
+  char *ptr = (char *)a.base;
+  char *ptr2 = (char *)b.base;
+  if(a.length != b.length || a.typeSize != b.typeSize)
+    return 0;
+  for(int i=0;i<(a.length*a.typeSize);i++){
+    if(ptr[i] != ptr2[i])
+      return 0;
+  }
+  return 1;
 };
 
 ArrayUtil resize(ArrayUtil arr,int length){
@@ -34,4 +40,9 @@ int findIndex(ArrayUtil arr, void *element){
       ptr += typeSize;
   }
   return -1;
+};
+
+void dispose(ArrayUtil arr){
+  void *ptr = arr.base;
+  free(ptr);
 };
