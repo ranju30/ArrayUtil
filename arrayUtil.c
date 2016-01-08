@@ -46,3 +46,15 @@ void dispose(ArrayUtil arr){
   void *ptr = arr.base;
   free(ptr);
 };
+
+void* findFirst(ArrayUtil arr,MatchFunc* match,void* hint){
+  void *ptr = arr.base;
+  void *final = NULL;
+  for(int i=0;i<arr.length;i++){
+    if(match(hint,ptr) == 1){
+      return ptr;
+    }
+    ptr = ptr + arr.typeSize;
+  };
+  return final;
+};
