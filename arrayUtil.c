@@ -49,12 +49,43 @@ void dispose(ArrayUtil arr){
 
 void* findFirst(ArrayUtil arr,MatchFunc* match,void* hint){
   void *ptr = arr.base;
-  void *final = NULL;
+  void *notFound = NULL;
   for(int i=0;i<arr.length;i++){
     if(match(hint,ptr) == 1){
       return ptr;
     }
     ptr = ptr + arr.typeSize;
   };
-  return final;
+  return notFound;
+};
+
+void* findLast(ArrayUtil arr,MatchFunc* match,void* hint){
+  void *ptr = arr.base;
+  void *value;
+  int condition = 0;
+  void *notFound = NULL;
+  for(int i=0;i<arr.length;i++){
+    if(match(hint,ptr) == 1){
+      condition = 1;
+      value = ptr;
+    }
+      ptr = ptr + arr.typeSize;
+  };
+  if(condition == 1){
+    return value;
+  }
+  return notFound;
+};
+
+int count(ArrayUtil arr, MatchFunc* match, void* hint){
+  void *ptr = arr.base;
+  int counter = 0;
+  void *notFound = NULL;
+  for(int i=0;i<arr.length;i++){
+    if(match(hint,ptr) == 1){
+      counter++;
+    }
+      ptr = ptr + arr.typeSize;
+  };
+  return counter;
 };

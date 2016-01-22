@@ -87,8 +87,8 @@ void test_findIndex_returns_index_if_element_is_present(){
   assert(findIndex(a,&x) == 2);
 };
 
-int isEqual(void* hint, void* item){
-  if(*((int *)hint) == *((int *)item)){
+int isEven(void* hint, void* item){
+  if(*((int *)item) % *((int *)hint) == 0){
     return 1;
   };
   return 0;
@@ -102,12 +102,41 @@ void test_findFirst_return_element_if_match_found(){
   ptr[2] = 7;
   ptr[3] = 8;
   ptr[4] = 9;
-  int hint = 8;
-  int * res = (int *)findFirst(a,&isEqual,&hint);
+  int hint = 2;
+  int * res = (int *)findFirst(a,&isEven,&hint);
+  assert(*res == 6);
+};
+
+void test_findLast_return_element_if_match_found(){
+  ArrayUtil a = create(4,6);
+  int *ptr = (int *)(a.base);
+  ptr[0] = 5;
+  ptr[1] = 6;
+  ptr[2] = 7;
+  ptr[3] = 8;
+  ptr[4] = 9;
+  ptr[5] = 11;
+  int hint = 2;
+  int * res = (int *)findLast(a,&isEven,&hint);
   assert(*res == 8);
 };
 
-// int main(int argc, char const *argv[]) {
-//   test_findFirst_return_element_if_match_found();
-//   return 0;
-// }
+void test_count_countes_no_of_values_match_with_hint(){
+  ArrayUtil a = create(4,6);
+  int *ptr = (int *)(a.base);
+  ptr[0] = 5;
+  ptr[1] = 6;
+  ptr[2] = 7;
+  ptr[3] = 8;
+  ptr[4] = 9;
+  ptr[5] = 12;
+  int hint = 2;
+  int res = count(a,&isEven,&hint);
+  assert(res == 3);
+};
+
+int main(int argc, char const *argv[]) {
+  test_count_countes_no_of_values_match_with_hint();
+  printf("Passing\n");
+  return 0;
+}

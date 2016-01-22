@@ -12,3 +12,5 @@ ArrayUtil resize(ArrayUtil,int);
 int findIndex(ArrayUtil,void *);
 void dispose(ArrayUtil);
 void* findFirst(ArrayUtil,MatchFunc* , void*);
+void* findLast(ArrayUtil,MatchFunc* , void*);
+int count(ArrayUtil, MatchFunc*, void*);
