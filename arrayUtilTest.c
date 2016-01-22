@@ -135,8 +135,24 @@ void test_count_countes_no_of_values_match_with_hint(){
   assert(res == 3);
 };
 
+void test_filter_insert_address_of_the_value_which_match_condition(){
+  ArrayUtil a = create(4,6);
+  int *ptr = (int *)(a.base);
+  ptr[0] = 5;
+  ptr[1] = 6;
+  ptr[2] = 7;
+  ptr[3] = 8;
+  ptr[4] = 9;
+  ptr[5] = 12;
+  int hint = 2;
+  ArrayUtil dest = create(4,6);
+  int maxLength = 6;
+  int res = filter(a,&isEven,&hint,dest.base,maxLength);
+  assert(res == 3);
+};
+
 int main(int argc, char const *argv[]) {
-  test_count_countes_no_of_values_match_with_hint();
+  test_filter_insert_address_of_the_value_which_match_condition();
   printf("Passing\n");
   return 0;
 }

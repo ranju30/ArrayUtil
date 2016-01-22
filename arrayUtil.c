@@ -89,3 +89,17 @@ int count(ArrayUtil arr, MatchFunc* match, void* hint){
   };
   return counter;
 };
+
+int filter(ArrayUtil arr, MatchFunc* match, void* hint, void** dest, int size){
+  void *ptr = arr.base;
+  int counter = 0;
+  void *notFound = NULL;
+  for(int i=0;i<arr.length;i++){
+    if(match(hint,ptr) == 1){
+      dest = ptr;
+      counter++;
+    }
+      ptr = ptr + arr.typeSize;
+  };
+  return counter;
+};
