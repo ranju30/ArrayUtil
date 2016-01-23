@@ -151,8 +151,45 @@ void test_filter_insert_address_of_the_value_which_match_condition(){
   assert(res == 3);
 };
 
+void inc(void *hint, void *source, void *dest){
+   *(int *)dest = *(int *)source + *(int *)hint;
+};
+
+void test_map_to_increment_each_element_of_array(){
+  ArrayUtil a = create(4,6);
+  int *ptr = (int *)(a.base);
+  ptr[0] = 5;
+  ptr[1] = 6;
+  ptr[2] = 7;
+  ptr[3] = 8;
+  ptr[4] = 9;
+  ptr[5] = 12;
+  int hint = 2;
+  ArrayUtil dest = create(4,6);
+  map(a,dest,&inc,&hint);
+  assert(dest.length == 6);
+};
+
+void add(void* hint,void *item){
+  *(int *)item = *(int *)hint + *(int *)item;
+};
+
+void test_forEach_do_operation_for_each_element(){
+  ArrayUtil a = create(4,6);
+  int *ptr = (int *)(a.base);
+  ptr[0] = 5;
+  ptr[1] = 6;
+  ptr[2] = 7;
+  ptr[3] = 8;
+  ptr[4] = 9;
+  ptr[5] = 12;
+  int hint = 2;
+  forEach(a,&add,&hint);
+  assert(6 == a.length);
+};
+
 int main(int argc, char const *argv[]) {
-  test_filter_insert_address_of_the_value_which_match_condition();
+  test_map_to_increment_each_element_of_array();
   printf("Passing\n");
   return 0;
 }

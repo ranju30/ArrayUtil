@@ -103,3 +103,20 @@ int filter(ArrayUtil arr, MatchFunc* match, void* hint, void** dest, int size){
   };
   return counter;
 };
+
+void map(ArrayUtil arr, ArrayUtil dest, ConvertFunc* convert, void* hint){
+  void *ptr = arr.base;
+  void *destAdd = dest.base;
+  for(int i=0;i<arr.length;i++){
+    convert(hint,ptr,destAdd);
+    ptr = ptr + arr.typeSize;
+    destAdd = destAdd + dest.typeSize;
+  };
+};
+
+void forEach(ArrayUtil arr, OperationFunc* op, void* hint){
+  void *ptr = arr.base;
+  for(int i=0;i<arr.length;i++){
+    op(hint,ptr);
+  };
+};
