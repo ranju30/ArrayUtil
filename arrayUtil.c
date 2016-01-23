@@ -118,5 +118,15 @@ void forEach(ArrayUtil arr, OperationFunc* op, void* hint){
   void *ptr = arr.base;
   for(int i=0;i<arr.length;i++){
     op(hint,ptr);
+    ptr = ptr + arr.typeSize;
   };
+};
+
+void *reduce(ArrayUtil arr,ReducerFunc* red,void* hint,void* initialValue){
+  void *ptr = arr.base;
+  for(int i=0;i<arr.length;i++){
+    red(hint,ptr,initialValue);
+    ptr = ptr + arr.typeSize;
+  };
+  return initialValue;
 };

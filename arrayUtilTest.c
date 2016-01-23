@@ -188,8 +188,28 @@ void test_forEach_do_operation_for_each_element(){
   assert(6 == a.length);
 };
 
+void* add_all(void* hint,void* prev,void* item){
+  *(int *)item = *(int *)hint + *(int *)prev;
+  return item;
+};
+
+void test_reduce_add_all_value_and_return_result(){
+  ArrayUtil a = create(4,6);
+  int *ptr = (int *)(a.base);
+  ptr[0] = 5;
+  ptr[1] = 6;
+  ptr[2] = 7;
+  ptr[3] = 8;
+  ptr[4] = 9;
+  ptr[5] = 12;
+  int hint = 2;
+  int initial = 0;
+  int *res = (int *)reduce(a,&add_all,&hint,&initial);
+  assert(14 == *res);
+}
+
 int main(int argc, char const *argv[]) {
-  test_map_to_increment_each_element_of_array();
+  test_reduce_add_all_value_and_return_result();
   printf("Passing\n");
   return 0;
 }
